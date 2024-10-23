@@ -1,0 +1,47 @@
+main {
+  border: solid;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+section {
+  border: solid;
+}
+
+.gearContainer {
+  display: flex;
+}
+
+.materiaSelect {
+  flex: 1;
+}
+
+#head,
+#ears {
+  grid-row: 2;
+}
+
+#chest,
+#neck {
+  grid-row: 3;
+}
+
+#gloves,
+#wrists {
+  grid-row: 4;
+}
+
+#legs,
+#lFinger {
+  grid-row: 5;
+}
+
+#feet,
+#rFinger {
+  grid-row: 6;
+}
+
+label {
+  text-align: right;
+  width: 82px;
+}

@@ -1,0 +1,33 @@
+{
+  "scrips": ["purple", "orange"],
+  "scripCosts": [0, 0, 0, 25, 200, 200, 200, 200, 200, 250, 250, 500],
+  "overmeldChances": {
+    "t1": [0.9, 0.48, 0.28, 0.16],
+    "t2": [0.82, 0.44, 0.26, 0.16],
+    "t3": [0.7, 0.38, 0.22, 0.14],
+    "t4": [0.58, 0.32, 0.2, 0.12],
+    "t5": [0.17, 0.1, 0.07, 0.05]
+  },
+  "crafting": {
+    "competence": {
+      "name": "Craftsman's Competence"
+    },
+    "command": {
+      "name": "Craftsman's Command"
+    },
+    "cunning": {
+      "name": "Craftsman's Cunning"
+    }
+  },
+  "gathering": {
+    "guerdon": {
+      "name": "Gatherer's Guerdon"
+    },
+    "guile": {
+      "name": "Gatherer's Guile"
+    },
+    "grasp": {
+      "name": "Gatherer's Grasp"
+    }
+  }
+}

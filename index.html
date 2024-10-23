@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+    <title>JavaScript Project</title>
+  </head>
+  <body>
+    <h1>JavaScript Project</h1>
+
+    <label for="role">Select Role:</label>
+    <select name="role" id="role">
+      <option value="crafter">Crafter</option>
+      <option value="gatherer">Gatherer</option>
+    </select>
+
+    <main>
+      <div class="gearContainer" id="main">
+        <label>Main</label>
+        <select name="mainOvermelds" id="mainOvermelds">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <select name="main1" id="main1" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="main2" id="main2" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="main3" id="main3" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="main4" id="main4" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="main5" id="main5" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+      </div>
+
+      <div class="gearContainer" id="secondary">
+        <label>Secondary</label>
+        <select name="secondaryOvermelds" id="secondaryOvermelds">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <select name="secondary1" id="secondary1" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="secondary2" id="secondary2" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="secondary3" id="secondary3" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="secondary4" id="secondary4" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="secondary5" id="secondary5" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+      </div>
+
+      <div class="gearContainer" id="head">
+        <label>Head</label>
+        <select name="headOvermelds" id="headOvermelds">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <select name="head1" id="head1" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="head2" id="head2" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="head3" id="head3" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="head4" id="head4" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="head5" id="head5" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+      </div>
+
+      <div class="gearContainer" id="chest">
+        <label>Chest</label>
+        <select name="chestOvermelds" id="chestOvermelds">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <select name="chest1" id="chest1" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="chest2" id="chest2" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="chest3" id="chest3" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="chest4" id="chest4" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="chest5" id="chest5" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+      </div>
+
+      <div class="gearContainer" id="gloves">
+        <label>Gloves</label>
+        <select name="glovesOvermelds" id="glovesOvermelds">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <select name="gloves1" id="gloves1" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="gloves2" id="gloves2" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="gloves3" id="gloves3" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="gloves4" id="gloves4" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="gloves5" id="gloves5" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+      </div>
+
+      <div class="gearContainer" id="legs">
+        <label>Legs</label>
+        <select name="legsOvermelds" id="legsOvermelds">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <select name="legs1" id="legs1" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="legs2" id="legs2" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="legs3" id="legs3" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="legs4" id="legs4" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="legs5" id="legs5" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+      </div>
+
+      <div class="gearContainer" id="feet">
+        <label>Feet</label>
+        <select name="feetOvermelds" id="feetOvermelds">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <select name="feet1" id="feet1" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="feet2" id="feet2" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="feet3" id="feet3" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="feet4" id="feet4" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="feet5" id="feet5" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+      </div>
+
+      <div class="gearContainer" id="ears">
+        <label>Ears</label>
+        <select name="earsOvermelds" id="earsOvermelds">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <select name="ears1" id="ears1" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="ears2" id="ears2" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="ears3" id="ears3" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="ears4" id="ears4" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="ears5" id="ears5" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+      </div>
+
+      <div class="gearContainer" id="neck">
+        <label>Neck</label>
+        <select name="neckOvermelds" id="neckOvermelds">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <select name="neck1" id="neck1" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="neck2" id="neck2" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="neck3" id="neck3" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="neck4" id="neck4" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="neck5" id="neck5" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+      </div>
+
+      <div class="gearContainer" id="wrists">
+        <label>Wrists</label>
+        <select name="wristsOvermelds" id="wristsOvermelds">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <select name="wrists1" id="wrists1" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="wrists2" id="wrists2" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="wrists3" id="wrists3" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="wrists4" id="wrists4" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="wrists5" id="wrists5" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+      </div>
+
+      <div class="gearContainer" id="lFinger">
+        <label>Left Finger</label>
+        <select name="lFingerOvermelds" id="lFingerOvermelds">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <select name="lFinger1" id="lFinger1" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="lFinger2" id="lFinger2" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="lFinger3" id="lFinger3" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="lFinger4" id="lFinger4" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="lFinger5" id="lFinger5" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+      </div>
+
+      <div class="gearContainer" id="rFinger">
+        <label>Right Finger</label>
+        <select name="rFingerOvermelds" id="rFingerOvermelds">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <select name="rFinger1" id="rFinger1" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="rFinger2" id="rFinger2" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="rFinger3" id="rFinger3" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="rFinger4" id="rFinger4" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+        <select name="rFinger5" id="rFinger5" class="materiaSelect">
+          <option value="none">None</option>
+        </select>
+      </div>
+    </main>
+    <section>
+      <div id="materiaList"></div>
+      <div id="scripAmounts"></div>
+    </section>
+  </body>
+</html>
