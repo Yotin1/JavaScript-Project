@@ -1,11 +1,8 @@
-main {
+main,
+section {
   border: solid;
   display: grid;
   grid-template-columns: auto auto;
-}
-
-section {
-  border: solid;
 }
 
 .gearContainer {
