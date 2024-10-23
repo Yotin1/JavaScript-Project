@@ -10,24 +10,30 @@
   },
   "crafting": {
     "competence": {
-      "name": "Craftsman's Competence"
+      "name": "Craftsman's Competence",
+      "totals": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     },
     "command": {
-      "name": "Craftsman's Command"
+      "name": "Craftsman's Command",
+      "totals": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     },
     "cunning": {
-      "name": "Craftsman's Cunning"
+      "name": "Craftsman's Cunning",
+      "totals": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
   },
   "gathering": {
     "guerdon": {
-      "name": "Gatherer's Guerdon"
+      "name": "Gatherer's Guerdon",
+      "totals": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     },
     "guile": {
-      "name": "Gatherer's Guile"
+      "name": "Gatherer's Guile",
+      "totals": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     },
     "grasp": {
-      "name": "Gatherer's Grasp"
+      "name": "Gatherer's Grasp",
+      "totals": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
   }
 }
