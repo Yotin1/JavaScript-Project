@@ -8,10 +8,23 @@ let JSONData = [];
 document.addEventListener("DOMContentLoaded", async function () {
   JSONData = await getData();
   console.log(JSONData);
+  role = roleOption.value;
+  console.log(role);
   for (let i of materiaOptions) {
     setMateriaOptions(i, JSONData);
   }
 });
+
+function loadLocalStorage() {
+  for (let i = 0; i < localStorage.length; i++) {
+    let key = loadLocalStorage.key(i);
+    document.getElementById(key).value = localStorage.getItem(key);
+  }
+}
+
+function saveLocalStorage(key, value) {
+  localStorage.setItem(key, value);
+}
 
 const overmeldSelect = [
   document.getElementById("mainOvermelds"),
@@ -51,9 +64,13 @@ const materiaOptions = [
   createSelectArray("rFinger"),
 ];
 
+const roleOption = document.getElementById("role");
+let role;
+roleOption.addEventListener("change", function () {});
+
 function setMateriaOptions(array, data) {
   for (let i of array) {
-    for (let [key, value] of Object.entries(data.crafter)) {
+    for (let [key, value] of Object.entries(data[role])) {
       if (key !== "name") {
         for (let j in value.totals) {
           let option = document.createElement("option");
