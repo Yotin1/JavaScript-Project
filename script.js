@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   // * loads data from local storage
   loadLocalStorage();
+  materiaCount();
 });
 
 function loadLocalStorage() {
@@ -136,4 +137,19 @@ function setMateriaOptions(array, data) {
       }
     }
   }
+}
+
+function materiaCount() {
+  let newJSONData = JSONData;
+  console.log(newJSONData);
+  for (let i of materiaOptions) {
+    for (let j of i) {
+      let name = j.value.match(/\D+/);
+      let num = j.value.match(/\d+/);
+      if (num) {
+        newJSONData[role][name[0]].totals[Number(num[0]) - 1] += 1;
+      }
+    }
+  }
+  console.log(newJSONData);
 }
