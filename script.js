@@ -152,13 +152,4 @@ function materiaCount() {
     }
   }
   console.log(newJSONData);
-  for (let i of materiaOptions) {
-    for (let j of i) {
-      let name = j.value.match(/\D+/);
-      let num = j.value.match(/\d+/);
-      if (num) {
-        newJSONData[role][name[0]].totals[Number(num[0]) - 1] += 1;
-      }
-    }
-  }
 }
