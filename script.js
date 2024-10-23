@@ -53,12 +53,11 @@ const materiaOptions = [
 
 function setMateriaOptions(array, data) {
   for (let i of array) {
-    for (let j of Object.keys(data.crafting)) {
-      console.log(j);
-      for (let k in data.scripCosts) {
+    for (let [key, value] of Object.entries(data.crafting)) {
+      for (let j in data.scripCosts) {
         let option = document.createElement("option");
-        option.value = data.crafting.values[j] + (Number(k) + 1).toString();
-        option.textContent = `${data.crafting.names[j]} ${(Number(k) + 1).toString()}`;
+        option.value = key + (Number(j) + 1).toString();
+        option.textContent = `${value.name} ${(Number(j) + 1).toString()}`;
         i.append(option);
       }
     }
