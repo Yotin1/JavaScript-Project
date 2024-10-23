@@ -1,31 +1,44 @@
+// * gets data from .json file
 async function getData() {
   let x = await fetch("./data.json");
   let y = await x.json();
   return y;
 }
 
+// * stores .json data
 let JSONData = [];
+// * runs on webpage load
 document.addEventListener("DOMContentLoaded", async function () {
   JSONData = await getData();
   console.log(JSONData);
+  // * stores value of role selection
   role = roleOption.value;
-  console.log(role);
+  // * loads the available materia options based on the selected role
   for (let i of materiaOptions) {
     setMateriaOptions(i, JSONData);
   }
+  // * loads data from local storage
+  loadLocalStorage();
 });
 
 function loadLocalStorage() {
+  // * sets value of the appropriate element for each key in local storage
   for (let i = 0; i < localStorage.length; i++) {
-    let key = loadLocalStorage.key(i);
+    let key = localStorage.key(i);
     document.getElementById(key).value = localStorage.getItem(key);
+    if (!document.getElementById(key).value) {
+      document.getElementById(key).value = "none";
+    }
   }
 }
 
-function saveLocalStorage(key, value) {
-  localStorage.setItem(key, value);
+// * saves data to local storage
+function saveLocalStorage(e) {
+  // console.log(e);
+  localStorage.setItem(e.target.id, e.target.value);
 }
 
+// * an array containing the select menus for the overmeld amounts of each gear
 const overmeldSelect = [
   document.getElementById("mainOvermelds"),
   document.getElementById("secondaryOvermelds"),
@@ -41,6 +54,12 @@ const overmeldSelect = [
   document.getElementById("rFingerOvermelds"),
 ];
 
+// * adds an event listener to react to a user selecting an overmeld option
+for (let i of overmeldSelect) {
+  i.addEventListener("change", saveLocalStorage);
+}
+
+// * creates an array containing the select elements for the materia options for a gear slot
 function createSelectArray(prefix) {
   let array = [];
   for (let i = 0; i < 5; i++) {
@@ -49,6 +68,7 @@ function createSelectArray(prefix) {
   return array;
 }
 
+// * array containing arrays of materia select elements for every gear slot
 const materiaOptions = [
   createSelectArray("main"),
   createSelectArray("secondary"),
@@ -64,10 +84,45 @@ const materiaOptions = [
   createSelectArray("rFinger"),
 ];
 
+// * adds event listeners to each materia select element
+for (let i of materiaOptions) {
+  for (let j of i) {
+    j.addEventListener("change", saveLocalStorage);
+  }
+}
+
+// * delaring the role option variable
 const roleOption = document.getElementById("role");
 let role;
-roleOption.addEventListener("change", function () {});
+// * event listener for the role select element
+roleOption.addEventListener("change", function (e) {
+  // * updates role variable
+  role = roleOption.value;
+  console.log(role);
+  // * saves role value to local storage
+  saveLocalStorage(e);
+  // * updates the available materia options by removing the old options and adding the new options
+  for (let i of materiaOptions) {
+    for (let j of i) {
+      for (let k = j.options.length - 1; k > 0; k--) {
+        j.remove(k);
+      }
+    }
+    setMateriaOptions(i, JSONData);
+  }
+  // * saves materia options to the local storage
+  for (let i = 0; i < localStorage.length; i++) {
+    if (localStorage.key(i) !== "role") {
+      let key = localStorage.key(i);
+      document.getElementById(key).value = localStorage.getItem(key);
+      if (!document.getElementById(key).value) {
+        document.getElementById(key).value = "none";
+      }
+    }
+  }
+});
 
+// * loads the relevant materia options based on the role value
 function setMateriaOptions(array, data) {
   for (let i of array) {
     for (let [key, value] of Object.entries(data[role])) {
