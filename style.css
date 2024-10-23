@@ -5,6 +5,10 @@ section {
   grid-template-columns: auto auto;
 }
 
+section {
+  min-height: 50px;
+}
+
 .gearContainer {
   display: flex;
 }
