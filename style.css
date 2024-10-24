@@ -29,6 +29,12 @@ label {
   width: 82px;
 }
 
+td {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @media (min-width: 2260px) {
   main {
     grid-template-columns: auto 1fr;

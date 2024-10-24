@@ -205,11 +205,14 @@ function materiaCount() {
   for (let type in materiaTotals) {
     for (let tier in materiaTotals[type]) {
       if (materiaTotals[type][tier] > 0) {
-        let resultEntry = document.createElement("p");
-        resultEntry.textContent = `${JSONData[role][materiaTypes[type]]} ${Number(tier) + 1} - ${
-          materiaTotals[type][tier]
-        }`;
+        let resultEntry = document.createElement("tr");
+        let resultName = document.createElement("td");
+        let resultData = document.createElement("td");
+        resultName.textContent = `${JSONData[role][materiaTypes[type]]} ${Number(tier) + 1} -`;
+        resultData.textContent = materiaTotals[type][tier];
         materiaList.append(resultEntry);
+        resultEntry.append(resultName);
+        resultEntry.append(resultData);
       }
     }
   }
