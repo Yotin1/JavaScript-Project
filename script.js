@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   // * stores the types of materia for a chosen role
   materiaTypes = [];
   for (let key of Object.keys(JSONData[role])) {
-    if (key != "name") {
+    if (key !== "name" && key !== "classNum") {
       materiaTypes.push(key);
     }
   }
@@ -110,7 +110,7 @@ roleOption.addEventListener("change", function (e) {
   // * stores the types of materia for a chosen role
   materiaTypes = [];
   for (let key of Object.keys(JSONData[role])) {
-    if (key != "name") {
+    if (key !== "name" && key !== "classNum") {
       materiaTypes.push(key);
     }
   }
@@ -145,7 +145,7 @@ roleOption.addEventListener("change", function (e) {
 function setMateriaOptions(array) {
   for (let materiaSelect of array) {
     for (let [key, value] of Object.entries(JSONData[role])) {
-      if (key !== "name") {
+      if (materiaTypes.includes(key)) {
         for (let i = 1; i <= JSONData.scripCosts.length; i++) {
           let option = document.createElement("option");
           option.value = key + i.toString();
@@ -196,7 +196,11 @@ function materiaCount() {
             chance = JSONData.overmeldChances.t5[Math.max(0, Number(j) - 4 + Number(overmeldSelect[i].value))];
             break;
         }
-        materiaTotals[materiaTypes.indexOf(type[0])][Number(tier[0]) - 1] += 1 / chance;
+        if (i < 2) {
+          materiaTotals[materiaTypes.indexOf(type[0])][Number(tier[0]) - 1] += JSONData[role].classNum / chance;
+        } else {
+          materiaTotals[materiaTypes.indexOf(type[0])][Number(tier[0]) - 1] += 1 / chance;
+        }
       }
     }
   }

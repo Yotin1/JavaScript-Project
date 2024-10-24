@@ -10,12 +10,14 @@
   },
   "crafter": {
     "name": "Crafter",
+    "classNum": 8,
     "competence": "Craftsman's Competence",
     "command": "Craftsman's Command",
     "cunning": "Craftsman's Cunning"
   },
   "gatherer": {
     "name": "Gatherer",
+    "classNum": 2,
     "guerdon": "Gatherer's Guerdon",
     "guile": "Gatherer's Guile",
     "grasp": "Gatherer's Grasp"
