@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   console.log(JSONData);
   // * stores value of role selection
   role = roleOption.value;
+  // * sets the number of materia types for that role
+  noMateriaTypes = Object.entries(JSONData[role]).length - 1;
   // * loads the available materia options based on the selected role
   for (let i of materiaOptions) {
     setMateriaOptions(i);
@@ -86,30 +88,32 @@ const materiaOptions = [
 ];
 
 // * adds event listeners to each materia select element
-for (let i of materiaOptions) {
-  for (let j of i) {
-    j.addEventListener("change", saveLocalStorage);
+for (let gearSlot of materiaOptions) {
+  for (let materiaSelect of gearSlot) {
+    materiaSelect.addEventListener("change", saveLocalStorage);
   }
 }
 
-// * delaring the role option variable
+// * delaring the role option variable and variable containing the number of materia for that role
 const roleOption = document.getElementById("role");
-let role;
+let role, noMateriaTypes;
 // * event listener for the role select element
 roleOption.addEventListener("change", function (e) {
   // * updates role variable
   role = roleOption.value;
+  // * sets the number of materia types for that role
+  noMateriaTypes = Object.entries(JSONData[role]).length - 1;
   console.log(role);
   // * saves role value to local storage
   saveLocalStorage(e);
   // * updates the available materia options by removing the old options and adding the new options
-  for (let i of materiaOptions) {
-    for (let j of i) {
-      for (let k = j.options.length - 1; k > 0; k--) {
-        j.remove(k);
+  for (let gearSlot of materiaOptions) {
+    for (let materiaSelect of gearSlot) {
+      for (let materiaOption = materiaSelect.options.length - 1; materiaOption > 0; materiaOption--) {
+        materiaSelect.remove(materiaOption);
       }
     }
-    setMateriaOptions(i);
+    setMateriaOptions(gearSlot);
   }
   // * saves materia options to the local storage
   for (let i = 0; i < localStorage.length; i++) {
@@ -125,31 +129,35 @@ roleOption.addEventListener("change", function (e) {
 
 // * loads the relevant materia options based on the role value
 function setMateriaOptions(array) {
-  for (let i of array) {
+  for (let materiaSelect of array) {
     for (let [key, value] of Object.entries(JSONData[role])) {
       if (key !== "name") {
-        for (let j in value.totals) {
+        for (let i = 1; i <= JSONData.scripCosts.length; i++) {
           let option = document.createElement("option");
-          option.value = key + (Number(j) + 1).toString();
-          option.textContent = `${value.name} ${(Number(j) + 1).toString()}`;
-          i.append(option);
+          option.value = key + i.toString();
+          option.textContent = `${value} ${i}`;
+          materiaSelect.append(option);
         }
       }
     }
   }
 }
 
+// * Counts the number of materia selected
 function materiaCount() {
-  let newJSONData = JSONData;
-  console.log(newJSONData);
-  for (let i of materiaOptions) {
-    for (let j of i) {
+  // * defines array storing the total amounts of each materia
+  let materiaTotals = [];
+  for (let i = 0; i < noMateriaTypes; i++) {
+    materiaTotals.push(Array(12).fill(0));
+  }
+  console.log(materiaTotals);
+  for (let gearSlot of materiaOptions) {
+    for (let j of gearSlot) {
       let name = j.value.match(/\D+/);
       let num = j.value.match(/\d+/);
-      if (num) {
-        newJSONData[role][name[0]].totals[Number(num[0]) - 1] += 1;
-      }
+      // if (num) {
+      //   newJSONData[role][name[0]].totals[Number(num[0]) - 1] += 1;
+      // }
     }
   }
-  console.log(newJSONData);
 }
