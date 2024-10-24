@@ -1,3 +1,7 @@
+* {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
 main,
 section {
   border: solid;
@@ -6,6 +10,7 @@ section {
   gap: 10px;
   padding: 10px;
   margin-top: 10px;
+  min-width: 500px;
 }
 
 section {
@@ -51,7 +56,6 @@ table {
 }
 
 table td {
-  border: 0px solid #ccc;
   text-wrap: nowrap;
 }
 
@@ -70,14 +74,14 @@ table #scrip2Result,
   vertical-align: top;
 }
 
-@media (min-width: 2260px) {
+@media (min-width: 2210px) {
   main {
     grid-template-columns: repeat(2, auto) 1fr;
     grid-template-rows: repeat(6, auto);
   }
 }
 
-@media (min-width: 1168px) {
+@media (min-width: 1125px) {
   .gearContainer {
     display: grid;
     grid-template-columns: repeat(7, auto) 1fr;
@@ -91,6 +95,6 @@ table #scrip2Result,
   }
 
   #results {
-    grid-template-columns: 550px 1fr;
+    grid-template-columns: 508px 1fr;
   }
 }
