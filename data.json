@@ -1,5 +1,5 @@
 {
-  "scrips": ["purple", "orange"],
+  "scrips": ["Purple", "Orange"],
   "scripCosts": [0, 0, 0, 25, 200, 200, 200, 200, 200, 250, 250, 500],
   "overmeldChances": {
     "t1": [1, 0.9, 0.48, 0.28, 0.16],
