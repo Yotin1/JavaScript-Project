@@ -13,8 +13,13 @@ document.addEventListener("DOMContentLoaded", async function () {
   console.log(JSONData);
   // * stores value of role selection
   role = roleOption.value;
-  // * sets the number of materia types for that role
-  noMateriaTypes = Object.entries(JSONData[role]).length - 1;
+  // * stores the types of materia for a chosen role
+  materiaTypes = [];
+  for (let key of Object.keys(JSONData[role])) {
+    if (key != "name") {
+      materiaTypes.push(key);
+    }
+  }
   // * loads the available materia options based on the selected role
   for (let i of materiaOptions) {
     setMateriaOptions(i);
@@ -60,6 +65,7 @@ const overmeldSelect = [
 // * adds an event listener to react to a user selecting an overmeld option
 for (let i of overmeldSelect) {
   i.addEventListener("change", saveLocalStorage);
+  i.addEventListener("change", materiaCount);
 }
 
 // * creates an array containing the select elements for the materia options for a gear slot
@@ -91,18 +97,25 @@ const materiaOptions = [
 for (let gearSlot of materiaOptions) {
   for (let materiaSelect of gearSlot) {
     materiaSelect.addEventListener("change", saveLocalStorage);
+    materiaSelect.addEventListener("change", materiaCount);
   }
 }
 
 // * delaring the role option variable and variable containing the number of materia for that role
 const roleOption = document.getElementById("role");
-let role, noMateriaTypes;
+let role, materiaTypes;
 // * event listener for the role select element
 roleOption.addEventListener("change", function (e) {
   // * updates role variable
   role = roleOption.value;
-  // * sets the number of materia types for that role
-  noMateriaTypes = Object.entries(JSONData[role]).length - 1;
+  // * stores the types of materia for a chosen role
+  materiaTypes = [];
+  for (let key of Object.keys(JSONData[role])) {
+    if (key != "name") {
+      materiaTypes.push(key);
+    }
+  }
+  console.log(materiaTypes);
   console.log(role);
   // * saves role value to local storage
   saveLocalStorage(e);
@@ -125,6 +138,8 @@ roleOption.addEventListener("change", function (e) {
       }
     }
   }
+  // * runs materia count function
+  materiaCount();
 });
 
 // * loads the relevant materia options based on the role value
@@ -143,21 +158,54 @@ function setMateriaOptions(array) {
   }
 }
 
+let materiaList = document.getElementById("materiaList");
 // * Counts the number of materia selected
 function materiaCount() {
   // * defines array storing the total amounts of each materia
   let materiaTotals = [];
-  for (let i = 0; i < noMateriaTypes; i++) {
+  for (let i = 0; i < materiaTypes.length; i++) {
     materiaTotals.push(Array(12).fill(0));
   }
-  console.log(materiaTotals);
-  for (let gearSlot of materiaOptions) {
-    for (let j of gearSlot) {
-      let name = j.value.match(/\D+/);
-      let num = j.value.match(/\d+/);
-      // if (num) {
-      //   newJSONData[role][name[0]].totals[Number(num[0]) - 1] += 1;
-      // }
+  // * loops over every materia select element and tallys the materia type and tier
+  for (let i in materiaOptions) {
+    for (let j in materiaOptions[i]) {
+      let type = materiaOptions[i][j].value.match(/\D+/);
+      let tier = materiaOptions[i][j].value.match(/\d+/);
+      if (tier) {
+        let chance = 1;
+        switch (tier[0]) {
+          case "1":
+            chance = JSONData.overmeldChances.t1[Math.max(0, Number(j) - 4 + Number(overmeldSelect[i].value))];
+            break;
+          case "2":
+            chance = JSONData.overmeldChances.t2[Math.max(0, Number(j) - 4 + Number(overmeldSelect[i].value))];
+            break;
+          case "3":
+            chance = JSONData.overmeldChances.t3[Math.max(0, Number(j) - 4 + Number(overmeldSelect[i].value))];
+            break;
+          case "4":
+            chance = JSONData.overmeldChances.t4[Math.max(0, Number(j) - 4 + Number(overmeldSelect[i].value))];
+            break;
+          default:
+            chance = JSONData.overmeldChances.t5[Math.max(0, Number(j) - 4 + Number(overmeldSelect[i].value))];
+            break;
+        }
+        materiaTotals[materiaTypes.indexOf(type[0])][Number(tier[0]) - 1] += 1 / chance;
+      }
+    }
+  }
+  for (let entry = materiaList.childElementCount - 1; entry >= 0; entry--) {
+    materiaList.children[entry].remove();
+  }
+  for (let type in materiaTotals) {
+    for (let tier in materiaTotals[type]) {
+      if (materiaTotals[type][tier] > 0) {
+        let resultEntry = document.createElement("p");
+        resultEntry.textContent = `${JSONData[role][materiaTypes[type]]} ${Number(tier) + 1} - ${
+          materiaTotals[type][tier]
+        }`;
+        materiaList.append(resultEntry);
+      }
     }
   }
 }
