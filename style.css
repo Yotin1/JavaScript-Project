@@ -9,7 +9,7 @@ section {
 }
 
 section {
-  grid-template-columns: auto auto;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 main {
@@ -20,6 +20,7 @@ main {
 
 section {
   min-height: 50px;
+  gap: 50px;
 }
 
 .gearContainer {
@@ -50,16 +51,23 @@ table {
 }
 
 table td {
-  border: 1px solid #ccc;
+  border: 0px solid #ccc;
   text-wrap: nowrap;
 }
 
-table .total {
+table .right {
   width: 100%;
+  padding-left: 2px;
 }
 
-.materia {
+table .left {
   text-align: right;
+}
+
+table #scrip2Result,
+#scrip2Num {
+  height: 100%;
+  vertical-align: top;
 }
 
 @media (min-width: 2260px) {
@@ -80,5 +88,9 @@ table .total {
   .left {
     grid-row: 1;
     align-self: center;
+  }
+
+  #results {
+    grid-template-columns: 550px 1fr;
   }
 }

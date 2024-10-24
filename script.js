@@ -160,8 +160,11 @@ function setMateriaOptions(array) {
 // * declare results section elements
 let materiaList = document.getElementById("materiaList");
 let materiaResult = document.getElementById("materiaResult");
+let materiaNum = document.getElementById("materiaNum");
 let scrip1Result = document.getElementById("scrip1Result");
+let scrip1Num = document.getElementById("scrip1Num");
 let scrip2Result = document.getElementById("scrip2Result");
+let scrip2Num = document.getElementById("scrip2Num");
 // * Counts the number of materia selected
 function materiaCount() {
   // * defines array storing the total amounts of each materia
@@ -207,9 +210,9 @@ function materiaCount() {
       if (materiaTotals[type][tier] > 0) {
         let resultEntry = document.createElement("tr");
         let resultName = document.createElement("td");
-        resultName.classList.add("materia");
+        resultName.classList.add("left");
         let resultData = document.createElement("td");
-        resultData.classList.add("total");
+        resultData.classList.add("right");
         resultName.textContent = `${JSONData[role][materiaTypes[type]]} ${Number(tier) + 1} -`;
         resultData.textContent = +materiaTotals[type][tier].toFixed(2);
         materiaList.append(resultEntry);
@@ -230,7 +233,10 @@ function materiaCount() {
       }
     }
   }
-  materiaResult.textContent = `Total Materia - ${+materiaTotal.toFixed(2)}`;
-  scrip1Result.textContent = `${JSONData.scrips[0]} Scrips - ${+scripTotal[0].toFixed(2)}`;
-  scrip2Result.textContent = `${JSONData.scrips[1]} Scrips - ${+scripTotal[1].toFixed(2)}`;
+  materiaResult.textContent = "Total Materia -";
+  materiaNum.textContent = +materiaTotal.toFixed(2);
+  scrip1Result.textContent = `${JSONData.scrips[0]} Scrips -`;
+  scrip1Num.textContent = +scripTotal[0].toFixed(2);
+  scrip2Result.textContent = `${JSONData.scrips[1]} Scrips -`;
+  scrip2Num.textContent = +scripTotal[1].toFixed(2);
 }
