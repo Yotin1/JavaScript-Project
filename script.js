@@ -159,6 +159,9 @@ function setMateriaOptions(array) {
 }
 
 let materiaList = document.getElementById("materiaList");
+let materiaResult = document.getElementById("materiaResult");
+let scrip1Result = document.getElementById("scrip1Result");
+let scrip2Result = document.getElementById("scrip2Result");
 // * Counts the number of materia selected
 function materiaCount() {
   // * defines array storing the total amounts of each materia
@@ -194,9 +197,11 @@ function materiaCount() {
       }
     }
   }
+  // * removes previous materia total elements
   for (let entry = materiaList.childElementCount - 1; entry >= 0; entry--) {
     materiaList.children[entry].remove();
   }
+  // * adds materia total elements if its count > 0
   for (let type in materiaTotals) {
     for (let tier in materiaTotals[type]) {
       if (materiaTotals[type][tier] > 0) {
@@ -208,4 +213,21 @@ function materiaCount() {
       }
     }
   }
+  let materiaTotal = 0;
+  let scripTotal = [0, 0];
+  for (let type of materiaTotals) {
+    for (let i in type) {
+      materiaTotal += type[i];
+      if (i >= type.length - 1) {
+        scripTotal[1] += type[i] * JSONData.scripCosts[i];
+      } else {
+        scripTotal[0] += type[i] * JSONData.scripCosts[i];
+      }
+    }
+  }
+  console.log(materiaTotal);
+  console.log(scripTotal);
+  materiaResult.textContent = `Total Materia - ${materiaTotal}`;
+  scrip1Result.textContent = `${JSONData.scrips[0]} Scrips - ${scripTotal[0]}`;
+  scrip2Result.textContent = `${JSONData.scrips[1]} Scrips - ${scripTotal[1]}`;
 }
