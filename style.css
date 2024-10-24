@@ -5,10 +5,17 @@ section {
   grid-template-columns: auto;
   gap: 10px;
   padding: 10px;
+  margin-top: 10px;
 }
 
 section {
   grid-template-columns: auto auto;
+}
+
+main {
+  grid-auto-flow: column;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: repeat(12, auto);
 }
 
 section {
@@ -16,8 +23,15 @@ section {
 }
 
 .gearContainer {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, auto) 1fr;
+  grid-auto-flow: column;
   gap: 5px;
+}
+
+.left {
+  grid-row: 1 / span 5;
+  align-self: center;
 }
 
 .materiaSelect {
@@ -29,39 +43,42 @@ label {
   width: 82px;
 }
 
-td {
-  max-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
+table {
+  table-layout: auto;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td {
+  border: 1px solid #ccc;
+  text-wrap: nowrap;
+}
+
+table .total {
+  width: 100%;
+}
+
+.materia {
+  text-align: right;
 }
 
 @media (min-width: 2260px) {
   main {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: repeat(2, auto) 1fr;
+    grid-template-rows: repeat(6, auto);
+  }
+}
+
+@media (min-width: 1168px) {
+  .gearContainer {
+    display: grid;
+    grid-template-columns: repeat(7, auto) 1fr;
+    grid-auto-flow: column;
+    gap: 5px;
   }
 
-  #head,
-  #ears {
-    grid-row: 2;
-  }
-
-  #chest,
-  #neck {
-    grid-row: 3;
-  }
-
-  #gloves,
-  #wrists {
-    grid-row: 4;
-  }
-
-  #legs,
-  #lFinger {
-    grid-row: 5;
-  }
-
-  #feet,
-  #rFinger {
-    grid-row: 6;
+  .left {
+    grid-row: 1;
+    align-self: center;
   }
 }

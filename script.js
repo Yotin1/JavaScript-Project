@@ -201,13 +201,15 @@ function materiaCount() {
   for (let entry = materiaList.childElementCount - 1; entry >= 0; entry--) {
     materiaList.children[entry].remove();
   }
-  // * adds materia total elements if its count > 0
+  // * adds materia total to table if its count > 0
   for (let type in materiaTotals) {
     for (let tier in materiaTotals[type]) {
       if (materiaTotals[type][tier] > 0) {
         let resultEntry = document.createElement("tr");
         let resultName = document.createElement("td");
+        resultName.classList.add("materia");
         let resultData = document.createElement("td");
+        resultData.classList.add("total");
         resultName.textContent = `${JSONData[role][materiaTypes[type]]} ${Number(tier) + 1} -`;
         resultData.textContent = materiaTotals[type][tier];
         materiaList.append(resultEntry);
