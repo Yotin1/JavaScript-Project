@@ -211,7 +211,7 @@ function materiaCount() {
         let resultData = document.createElement("td");
         resultData.classList.add("total");
         resultName.textContent = `${JSONData[role][materiaTypes[type]]} ${Number(tier) + 1} -`;
-        resultData.textContent = materiaTotals[type][tier];
+        resultData.textContent = +materiaTotals[type][tier].toFixed(2);
         materiaList.append(resultEntry);
         resultEntry.append(resultName);
         resultEntry.append(resultData);
@@ -230,7 +230,7 @@ function materiaCount() {
       }
     }
   }
-  materiaResult.textContent = `Total Materia - ${materiaTotal}`;
-  scrip1Result.textContent = `${JSONData.scrips[0]} Scrips - ${scripTotal[0]}`;
-  scrip2Result.textContent = `${JSONData.scrips[1]} Scrips - ${scripTotal[1]}`;
+  materiaResult.textContent = `Total Materia - ${+materiaTotal.toFixed(2)}`;
+  scrip1Result.textContent = `${JSONData.scrips[0]} Scrips - ${+scripTotal[0].toFixed(2)}`;
+  scrip2Result.textContent = `${JSONData.scrips[1]} Scrips - ${+scripTotal[1].toFixed(2)}`;
 }
