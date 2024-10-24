@@ -10,7 +10,6 @@ let JSONData = [];
 // * runs on webpage load
 document.addEventListener("DOMContentLoaded", async function () {
   JSONData = await getData();
-  console.log(JSONData);
   // * stores value of role selection
   role = roleOption.value;
   // * stores the types of materia for a chosen role
@@ -158,6 +157,7 @@ function setMateriaOptions(array) {
   }
 }
 
+// * declare results section elements
 let materiaList = document.getElementById("materiaList");
 let materiaResult = document.getElementById("materiaResult");
 let scrip1Result = document.getElementById("scrip1Result");
@@ -225,8 +225,6 @@ function materiaCount() {
       }
     }
   }
-  console.log(materiaTotal);
-  console.log(scripTotal);
   materiaResult.textContent = `Total Materia - ${materiaTotal}`;
   scrip1Result.textContent = `${JSONData.scrips[0]} Scrips - ${scripTotal[0]}`;
   scrip2Result.textContent = `${JSONData.scrips[1]} Scrips - ${scripTotal[1]}`;
