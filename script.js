@@ -114,8 +114,6 @@ roleOption.addEventListener("change", function (e) {
       materiaTypes.push(key);
     }
   }
-  console.log(materiaTypes);
-  console.log(role);
   // * saves role value to local storage
   saveLocalStorage(e);
   // * updates the available materia options by removing the old options and adding the new options
@@ -147,7 +145,7 @@ function setMateriaOptions(array) {
     for (let [key, value] of Object.entries(JSONData[role])) {
       if (materiaTypes.includes(key)) {
         for (let i = 1; i <= JSONData.scripCosts.length; i++) {
-          let option = document.createElement("option");
+          const option = document.createElement("option");
           option.value = key + i.toString();
           option.textContent = `${value} ${i}`;
           materiaSelect.append(option);
@@ -158,13 +156,13 @@ function setMateriaOptions(array) {
 }
 
 // * declare results section elements
-let materiaList = document.getElementById("materiaList");
-let materiaResult = document.getElementById("materiaResult");
-let materiaNum = document.getElementById("materiaNum");
-let scrip1Result = document.getElementById("scrip1Result");
-let scrip1Num = document.getElementById("scrip1Num");
-let scrip2Result = document.getElementById("scrip2Result");
-let scrip2Num = document.getElementById("scrip2Num");
+const materiaList = document.getElementById("materiaList");
+const materiaResult = document.getElementById("materiaResult");
+const materiaNum = document.getElementById("materiaNum");
+const scrip1Result = document.getElementById("scrip1Result");
+const scrip1Num = document.getElementById("scrip1Num");
+const scrip2Result = document.getElementById("scrip2Result");
+const scrip2Num = document.getElementById("scrip2Num");
 // * Counts the number of materia selected
 function materiaCount() {
   // * defines array storing the total amounts of each materia
@@ -212,10 +210,10 @@ function materiaCount() {
   for (let type in materiaTotals) {
     for (let tier in materiaTotals[type]) {
       if (materiaTotals[type][tier] > 0) {
-        let resultEntry = document.createElement("tr");
-        let resultName = document.createElement("td");
+        const resultEntry = document.createElement("tr");
+        const resultName = document.createElement("td");
         resultName.classList.add("left");
-        let resultData = document.createElement("td");
+        const resultData = document.createElement("td");
         resultData.classList.add("right");
         resultName.textContent = `${JSONData[role][materiaTypes[type]]} ${Number(tier) + 1} -`;
         resultData.textContent = +materiaTotals[type][tier].toFixed(2);
@@ -244,3 +242,42 @@ function materiaCount() {
   scrip2Result.textContent = `${JSONData.scrips[1]} Scrips -`;
   scrip2Num.textContent = +scripTotal[1].toFixed(2);
 }
+
+const clearMateriaBtn = document.getElementById("clearMateriaBtn");
+const clearAllBtn = document.getElementById("clearAllBtn");
+
+function clearOvermelds() {
+  for (let overmeld of overmeldSelect) {
+    overmeld.value = "0";
+  }
+}
+
+function clearMateria() {
+  for (let gearSlot of materiaOptions) {
+    for (let materiaSlot of gearSlot) {
+      materiaSlot.value = "none";
+    }
+  }
+}
+
+clearMateriaBtn.addEventListener("click", function () {
+  if (confirm("Are you sure you want to clear Materia?")) {
+    clearMateria();
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+      let key = localStorage.key(i);
+      if (!key.includes("Overmelds")) {
+        localStorage.removeItem(key);
+      }
+    }
+    materiaCount();
+  }
+});
+
+clearAllBtn.addEventListener("click", function () {
+  if (confirm("Are you sure you want to clear everything?")) {
+    clearOvermelds();
+    clearMateria();
+    localStorage.clear();
+    materiaCount();
+  }
+});

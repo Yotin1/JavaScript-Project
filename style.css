@@ -3,7 +3,8 @@
 }
 
 h1,
-#roleLabel {
+#roleLabel,
+#clearMateriaBtn {
   margin-left: 10px;
 }
 
@@ -77,6 +78,12 @@ table #scrip2Result,
 #scrip2Num {
   height: 100%;
   vertical-align: top;
+}
+
+#clearMateriaBtn,
+#clearAllBtn {
+  margin-top: 10px;
+  right: 10px;
 }
 
 @media (min-width: 2210px) {
