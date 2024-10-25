@@ -51,7 +51,7 @@ section {
   border-color: deepskyblue;
 }
 
-label {
+label.left {
   text-align: right;
   width: 82px;
 }
@@ -60,10 +60,12 @@ table {
   table-layout: auto;
   border-collapse: collapse;
   width: 100%;
+  height: fit-content;
 }
 
 table td {
   text-wrap: nowrap;
+  vertical-align: top;
 }
 
 table .right {
@@ -78,13 +80,18 @@ table .left {
 table #scrip2Result,
 #scrip2Num {
   height: 100%;
-  vertical-align: top;
 }
 
 #clearMateriaBtn,
 #clearAllBtn {
   margin-top: 10px;
   right: 10px;
+}
+
+.chance {
+  grid-column: 4;
+  width: 35px;
+  padding-right: 5px;
 }
 
 @media (min-width: 2210px) {
@@ -109,5 +116,9 @@ table #scrip2Result,
 
   #results {
     grid-template-columns: 508px 1fr;
+  }
+
+  .chance {
+    grid-column: auto;
   }
 }
