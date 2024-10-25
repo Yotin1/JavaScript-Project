@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   JSONData = await getData();
   // * stores value of role selection
   role = roleOption.value;
+  mainLabel.textContent = `Main (x${JSONData[role].classNum})`;
+  secondaryLabel.textContent = `Secondary (x${JSONData[role].classNum})`;
   // * stores the types of materia for a chosen role
   materiaTypes = [];
   for (let key of Object.keys(JSONData[role])) {
@@ -32,8 +34,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
   materiaCount();
-  // calculateChance(0, 0);
 });
+
+const mainLabel = document.getElementById("mainLabel");
+const secondaryLabel = document.getElementById("secondaryLabel");
 
 function loadLocalStorage() {
   // * sets value of the appropriate element for each key in local storage
@@ -197,6 +201,8 @@ let role, materiaTypes;
 roleOption.addEventListener("change", function (e) {
   // * updates role variable
   role = roleOption.value;
+  mainLabel.textContent = `Main (x${JSONData[role].classNum})`;
+  secondaryLabel.textContent = `Secondary (x${JSONData[role].classNum})`;
   // * stores the types of materia for a chosen role
   materiaTypes = [];
   for (let key of Object.keys(JSONData[role])) {
