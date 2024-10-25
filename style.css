@@ -48,6 +48,7 @@ section {
 
 .materiaSelect {
   flex: 0;
+  border-color: deepskyblue;
 }
 
 label {

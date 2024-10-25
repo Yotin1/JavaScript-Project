@@ -25,6 +25,11 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   // * loads data from local storage
   loadLocalStorage();
+  for (let option of overmeldSelect) {
+    for (let i = 6; i > 6 - option.value; i--) {
+      option.parentElement.children[i].style.borderColor = "red";
+    }
+  }
   materiaCount();
 });
 
@@ -63,8 +68,15 @@ const overmeldSelect = [
 
 // * adds an event listener to react to a user selecting an overmeld option
 for (let i of overmeldSelect) {
-  i.addEventListener("change", saveLocalStorage);
-  i.addEventListener("change", materiaCount);
+  // i.addEventListener("change", saveLocalStorage);
+  // i.addEventListener("change", materiaCount);
+  i.addEventListener("change", function (e) {
+    saveLocalStorage(e);
+    for (let i = 6; i > 6 - e.target.value; i--) {
+      e.target.parentElement.children[i].style.borderColor = "red";
+    }
+    materiaCount();
+  });
 }
 
 // * creates an array containing the select elements for the materia options for a gear slot
