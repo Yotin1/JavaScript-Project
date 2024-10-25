@@ -25,12 +25,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   // * loads data from local storage
   loadLocalStorage();
-  for (let option of overmeldSelect) {
-    for (let i = 6; i > 6 - option.value; i--) {
-      option.parentElement.children[i].style.borderColor = "red";
+  for (let gearSlot in overmeldSelect) {
+    updateOvermelds(overmeldSelect[gearSlot]);
+    for (let materiaSlot in materiaOptions[gearSlot]) {
+      calculateChance(gearSlot, materiaSlot);
     }
   }
   materiaCount();
+  // calculateChance(0, 0);
 });
 
 function loadLocalStorage() {
@@ -66,14 +68,26 @@ const overmeldSelect = [
   document.getElementById("rFingerOvermelds"),
 ];
 
+function updateOvermelds(element) {
+  for (let i = 10; i >= 2; i -= 2) {
+    if (i > 10 - 2 * element.value) {
+      element.parentElement.children[i].style.borderColor = "red";
+    } else {
+      element.parentElement.children[i].style.borderColor = "deepskyblue";
+    }
+  }
+}
+
 // * adds an event listener to react to a user selecting an overmeld option
-for (let i of overmeldSelect) {
+for (let i in overmeldSelect) {
   // i.addEventListener("change", saveLocalStorage);
   // i.addEventListener("change", materiaCount);
-  i.addEventListener("change", function (e) {
+  overmeldSelect[i].addEventListener("change", function (e) {
+    let gearSlot = overmeldSelect.indexOf(e.target);
     saveLocalStorage(e);
-    for (let i = 6; i > 6 - e.target.value; i--) {
-      e.target.parentElement.children[i].style.borderColor = "red";
+    updateOvermelds(e.target);
+    for (let materiaSlot in materiaOptions[gearSlot]) {
+      calculateChance(gearSlot, materiaSlot);
     }
     materiaCount();
   });
@@ -104,11 +118,75 @@ const materiaOptions = [
   createSelectArray("rFinger"),
 ];
 
+function createChanceArray(prefix) {
+  let array = [];
+  for (let i = 0; i < 5; i++) {
+    array.push(document.getElementById(`${prefix}${i + 1}Chance`));
+  }
+  return array;
+}
+
+const materiaChances = [
+  createChanceArray("main"),
+  createChanceArray("secondary"),
+  createChanceArray("head"),
+  createChanceArray("chest"),
+  createChanceArray("gloves"),
+  createChanceArray("legs"),
+  createChanceArray("feet"),
+  createChanceArray("ears"),
+  createChanceArray("neck"),
+  createChanceArray("wrists"),
+  createChanceArray("lFinger"),
+  createChanceArray("rFinger"),
+];
+
+function calculateChance(gearSlot, materiaSlot) {
+  let materia = materiaOptions[gearSlot][materiaSlot].value;
+  let tier, chance;
+  materia.match(/\d+/) ? (tier = materia.match(/\d+/)[0]) : (tier = 0);
+  switch (Math.min(5, tier)) {
+    case 1:
+      chance =
+        JSONData.overmeldChances.t1[Math.max(0, Number(materiaSlot) - 4 + Number(overmeldSelect[gearSlot].value))];
+      break;
+    case 2:
+      chance =
+        JSONData.overmeldChances.t2[Math.max(0, Number(materiaSlot) - 4 + Number(overmeldSelect[gearSlot].value))];
+      break;
+    case 3:
+      chance =
+        JSONData.overmeldChances.t3[Math.max(0, Number(materiaSlot) - 4 + Number(overmeldSelect[gearSlot].value))];
+      break;
+    case 4:
+      chance =
+        JSONData.overmeldChances.t4[Math.max(0, Number(materiaSlot) - 4 + Number(overmeldSelect[gearSlot].value))];
+      break;
+    case 5:
+      chance =
+        JSONData.overmeldChances.t5[Math.max(0, Number(materiaSlot) - 4 + Number(overmeldSelect[gearSlot].value))];
+      break;
+    default:
+      chance = null;
+  }
+  if (chance) {
+    materiaChances[gearSlot][materiaSlot].textContent = `${Math.floor(chance * 100)}%`;
+  } else {
+    materiaChances[gearSlot][materiaSlot].textContent = "-";
+  }
+}
+
 // * adds event listeners to each materia select element
-for (let gearSlot of materiaOptions) {
-  for (let materiaSelect of gearSlot) {
-    materiaSelect.addEventListener("change", saveLocalStorage);
-    materiaSelect.addEventListener("change", materiaCount);
+for (let gearSlot in materiaOptions) {
+  for (let materiaSlot in materiaOptions[gearSlot]) {
+    // materiaSlot.addEventListener("change", saveLocalStorage);
+    // materiaSlot.addEventListener("change", materiaCount);
+    materiaOptions[gearSlot][materiaSlot].addEventListener("change", function (e) {
+      saveLocalStorage(e);
+      calculateChance(gearSlot, materiaSlot);
+      materiaCount();
+      // calculateChance(materiaOptions.indexOf(gearSlot), materiaSlot);
+    });
   }
 }
 
@@ -188,24 +266,7 @@ function materiaCount() {
       let type = materiaOptions[i][j].value.match(/\D+/);
       let tier = materiaOptions[i][j].value.match(/\d+/);
       if (tier) {
-        let chance = 1;
-        switch (tier[0]) {
-          case "1":
-            chance = JSONData.overmeldChances.t1[Math.max(0, Number(j) - 4 + Number(overmeldSelect[i].value))];
-            break;
-          case "2":
-            chance = JSONData.overmeldChances.t2[Math.max(0, Number(j) - 4 + Number(overmeldSelect[i].value))];
-            break;
-          case "3":
-            chance = JSONData.overmeldChances.t3[Math.max(0, Number(j) - 4 + Number(overmeldSelect[i].value))];
-            break;
-          case "4":
-            chance = JSONData.overmeldChances.t4[Math.max(0, Number(j) - 4 + Number(overmeldSelect[i].value))];
-            break;
-          default:
-            chance = JSONData.overmeldChances.t5[Math.max(0, Number(j) - 4 + Number(overmeldSelect[i].value))];
-            break;
-        }
+        let chance = parseFloat(materiaChances[i][j].textContent) / 100;
         if (i < 2) {
           materiaTotals[materiaTypes.indexOf(type[0])][Number(tier[0]) - 1] += JSONData[role].classNum / chance;
         } else {
@@ -261,13 +322,15 @@ const clearAllBtn = document.getElementById("clearAllBtn");
 function clearOvermelds() {
   for (let overmeld of overmeldSelect) {
     overmeld.value = "0";
+    updateOvermelds(overmeld);
   }
 }
 
 function clearMateria() {
-  for (let gearSlot of materiaOptions) {
-    for (let materiaSlot of gearSlot) {
-      materiaSlot.value = "none";
+  for (let gearSlot in materiaOptions) {
+    for (let materiaSlot in materiaOptions[gearSlot]) {
+      materiaOptions[gearSlot][materiaSlot].value = "none";
+      calculateChance(gearSlot, materiaSlot);
     }
   }
 }
